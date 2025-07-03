@@ -12,9 +12,9 @@ const MovieCard = ({ movie }) => {
         <h2 className="card-title">{movie.original_title}</h2>
         <p className=" text-pretty line-clamp-4"> {movie.overview}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">
-            <Link path="movie/:id">Details</Link>
-          </button>
+          <Link to={`movie/${movie.id}`}>
+            <button className="btn btn-primary">Details</button>
+          </Link>
         </div>
       </div>
     </div>
