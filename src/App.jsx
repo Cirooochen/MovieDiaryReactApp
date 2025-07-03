@@ -1,18 +1,20 @@
 import "./index.css";
-import { Routes, Route, Link } from "react-router";
+import { Routes, Route } from "react-router";
 import MainLayout from "../layouts/MainLayout";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import MovieDetails from "../components/MovieDetails";
+import About from "./pages/About";
+import MovieDetails from "./pages/MovieDetails";
+import Home from "./pages/Home";
+import Error404 from "./pages/Error404";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route path="/" element={<Hero />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/movie/:id" element={<MovieDetails />}></Route>
       </Route>
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 };

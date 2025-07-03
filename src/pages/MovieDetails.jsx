@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Route, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
-import BreadCrumbs from "./BreadCrumbs";
+import BreadCrumbs from "../components/BreadCrumbs";
 const MovieDetails = () => {
   const { id } = useParams();
-
-  const [movie, setMovie] = useState([]);
-
+  const [movie, setMovie] = useState({});
+  const navigate = useNavigate();
+  console.log(movie);
   useEffect(() => {
     const controller = new AbortController();
     const options = {
@@ -32,9 +32,8 @@ const MovieDetails = () => {
         }
         const data = await response.json();
         const movieList = data.results;
-        const thisMovie = movieList.find((movie) => movie.id === id);
-        setMovie(thisMovie);
-        // return data;
+        const theMovie = movieList.find((movie) => movie.id === Number(id));
+        setMovie(theMovie);
       } catch (error) {
         console.error("Fetch error:", error);
       }
@@ -45,11 +44,12 @@ const MovieDetails = () => {
       controller.abort();
     };
   }, []);
+  console.log(movie);
 
   return (
     <div>
       <BreadCrumbs />
-      <div className="card lg:card-side bg-base-100 shadow-sm">
+      <div className="card lg:card-side bg-base-100 ">
         <figure>
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
@@ -59,9 +59,16 @@ const MovieDetails = () => {
         <div className="card-body">
           <h2 className="card-title">{movie.original_title}</h2>
           <p>{movie.overview}</p>
-          {/* <div className="card-actions justify-end">
-            <button className="btn btn-primary">Listen</button>
-          </div> */}
+          <div className="card-actions justify-end">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="btn btn-primary"
+            >
+              Go back
+            </button>
+          </div>
         </div>
       </div>
     </div>
