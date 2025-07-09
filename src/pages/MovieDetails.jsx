@@ -7,6 +7,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const navigate = useNavigate();
   console.log(movie);
+
   useEffect(() => {
     const controller = new AbortController();
     const options = {
@@ -20,7 +21,7 @@ const MovieDetails = () => {
     const fetchMovies = async () => {
       try {
         const response = await fetch(
-          "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
+          `https://api.themoviedb.org/3/movie/${id}`,
           options,
           {
             signal: controller.signal, //We connect the fetch req to the controller above
@@ -31,9 +32,8 @@ const MovieDetails = () => {
           throw new Error("Something went wrong!!!");
         }
         const data = await response.json();
-        const movieList = data.results;
-        const theMovie = movieList.find((movie) => movie.id === Number(id));
-        setMovie(theMovie);
+
+        setMovie(data);
       } catch (error) {
         console.error("Fetch error:", error);
       }

@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <div className="relative h-screen overflow-hidden">
       <video autoPlay loop className="absolute w-full h-full object-cover z-0">
-        <source src="../src/assets/bgVideo.mp4" type="video/mp4" />
+        <source src="bgVideo.mp4" type="video/mp4" />
       </video>
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <div className="absolute bg-black/80 z-10"></div>
